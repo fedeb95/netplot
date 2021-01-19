@@ -39,7 +39,7 @@ If you get:
 
 `No data to show :-)`
 
-then great! It means that no packets where sniffed. If you want something plotted, try opening a browser at your URL of choice.
+then great! It means that no packets where sent by your computer, so reasonably you don't have trackers around. If you want something plotted, try opening a browser at your URL of choice.
 
 ## Usage
 ```
