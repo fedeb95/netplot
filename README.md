@@ -41,7 +41,7 @@ If you get:
 
 then great! It means that no packets where sniffed. If you want something plotted, try opening a browser at your URL of choice.
 
-## Options
+## Usage
 ```
 usage: netplot.py [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m]
 
@@ -60,6 +60,14 @@ optional arguments:
                         accessing network
   -m, --missed          Show not supported protocols as missed packets
 ```
+
+Since apparently `scapy` is slow and misses packets, for some use cases it's better to run `tcpdump` and then process a file with `netplot`.
+This can be done with the simple `netplot.sh` wrapper:
+
+```
+./netplot.sh <network_interface> <filename> <other_netplot_args>
+```
+This has the drawback of potentially missing process names, so if you need thos just stick to `netplot.py` without the `-f` option.
 
 ## TODO list
 * add arguments to better control program's behaviour
