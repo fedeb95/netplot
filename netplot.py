@@ -15,6 +15,7 @@ import psutil
 # imports for analysis
 import numpy as np
 import pandas as pd
+import termplotlib as tpl
 
 # arguments
 iface = None
@@ -52,7 +53,12 @@ def analyze_packets(signal_received, frame):
         data = np.array(collected_data);
         columns = ["data"]
         df = pd.DataFrame(data=list(collected_data), columns=columns)
-        print(df["data"].value_counts().to_frame())
+        table = df["data"].value_counts()
+        labels = list(table.index)
+        counts = [ int(c) for c in table.to_numpy().tolist() ]
+        fig = tpl.figure()
+        fig.barh(counts, labels, force_ascii=True)
+        fig.show()
     if show_missed and len(missed) > 0:
         print()
         print("Packets not analyzed: ")
@@ -98,7 +104,8 @@ def process_packet(packet):
             elif raw:
                 collected_data.append(packet[IP].dst)
             else:
-                pid = list(filter(lambda item: item.laddr[0]==packet[IP].dst and item.laddr[1]==packet[IP].sport, psutil.net_connections()))
+                connections = psutil.net_connections()
+                pid = list(filter(lambda item: filter_conn(item, packet), connections))
                 if verbose_extra:
                     print("PID info: " + str(pid))
                 # pids should only listen on one port at a time... or not?
@@ -111,6 +118,9 @@ def process_packet(packet):
                     print("Process " + pname)
     else:
         missed.append("not collected: " + packet.summary())
+
+def filter_conn(item, packet):
+    return hasattr(item, 'raddr') and hasattr(item.raddr, 'ip') and hasattr(item, 'laddr') and hasattr(item.laddr, 'port') and item.raddr.ip==packet[IP].dst and item.laddr.port==packet[IP].sport
 
 def main():
     global iface, verbose, filename, collect_hosts, verbose_extra, show_missed, raw

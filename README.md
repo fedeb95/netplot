@@ -16,6 +16,18 @@ Functionalities:
 * optionally show which IP addresses your running programs contacted or try to resolve their dns
 * find out that somehow you're selling your data to Google, Facebook & friends!
 
+## Example
+
+```
+(venv) fedeb@debian:~/Projects/netplot$ sudo venv/bin/python3 netplot.py -i wlp2s0
+Sniffing packets, interrupt with Ctrl+C
+^C
+unknown call to dns.adguard.com  [220]  ****************************************
+firefox-esr                      [ 45]  *********
+evolution-calendar-factory       [  6]  **
+vivaldi-bin                      [  2]  *
+```
+
 ## Install
 * clone this repo & run `cd netplot`
 * run `python3 -m venv venv`
