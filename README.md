@@ -76,7 +76,7 @@ This can be done with the simple `netplot.sh` wrapper:
 This has the drawback of potentially missing process names, so if you need them just stick to `netplot.py` without the `-f` option.
 
 ## Mitm
-If you use netplot.sh while doing a mitm attack (maybe with `arpspoof`) you can see which sites where visited by target host in your network. Since process resolution doesn't make sense, `netplot` is best used with `--resolve-domain` or `--raw`.
+If you use netplot.sh while doing a mitm attack (maybe with `arpspoof`) you can see which sites where most visited by target host in your network. Since process resolution doesn't make sense, `netplot` is best used with `--resolve-domain` or `--raw`.
 
 ## TODO list
 * add arguments to better control program's behaviour
