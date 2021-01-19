@@ -25,6 +25,10 @@ filename = None
 verbose_extra = False
 show_missed = False
 raw = False
+show_port = False
+flt = ""
+both = False
+incoming = False
 
 # data collected
 collected_data = []
@@ -69,27 +73,26 @@ def sniff_packets(store=False):
     if filename:
         if verbose or verbose_extra:
             print(f"Reading packets from {filename}")
-        packets = sniff(offline=filename, iface=iface)
+        packets = sniff(filter=flt, offline=filename, iface=iface)
         [ process_packet(packet) for packet in packets ]
         analyze_packets(None, None)
     else:
         signal(SIGINT, analyze_packets)
         print("Sniffing packets, interrupt with Ctrl+C")
         if iface:
-            if iface:
-                ip = get_if_addr(iface)
-                if verbose or verbose_extra:
-                    print(f"Started packed capture for {ip}");
-            sniff(prn=process_packet, iface=iface, store=store)
+            ip = get_if_addr(iface)
+            if verbose or verbose_extra:
+                print(f"Started packed capture for {ip}");
+            sniff(filter=flt, prn=process_packet, iface=iface, store=store)
         else:
-            sniff(prn=process_packet, store=store)
+            sniff(filter=flt, prn=process_packet, store=store)
 
 def process_packet(packet):
     """
     This function is executed whenever a packet is sniffed
     """
-    if (packet.haslayer(TCP) or packet.haslayer(UDP)) and packet.haslayer(IP):
-        if not iface or packet[IP].dst != get_if_addr(iface):
+    if packet.haslayer(IP):
+        if is_to_process(packet, get_if_addr(iface)):
             if verbose or verbose_extra:
                 print("==============================")
                 print(packet.summary())
@@ -111,6 +114,9 @@ def process_packet(packet):
                 # pids should only listen on one port at a time... or not?
                 if len(pid) > 0 and len(pid[0]) > 6:
                     pname = psutil.Process(pid[0][6]).name()
+                    if show_port:
+                        port = str(pid[0].laddr.port)
+                        pname += f":{port}"
                 else:
                     pname = f"unknown call to {ip}"
                 collected_data.append(pname)
@@ -119,11 +125,22 @@ def process_packet(packet):
     else:
         missed.append("not collected: " + packet.summary())
 
+def is_to_process(packet, localaddr):
+    if both:
+        # both incoming and outgoing packets
+        return True
+    if incoming:
+        # incoming packets only
+        return packet[IP].dst == get_if_addr(iface)
+    else:
+        # outgoing packets only
+        return packet[IP].dst != get_if_addr(iface)
+
 def filter_conn(item, packet):
     return hasattr(item, 'raddr') and hasattr(item.raddr, 'ip') and hasattr(item, 'laddr') and hasattr(item.laddr, 'port') and item.raddr.ip==packet[IP].dst and item.laddr.port==packet[IP].sport
 
 def main():
-    global iface, verbose, filename, collect_hosts, verbose_extra, show_missed, raw
+    global iface, verbose, filename, collect_hosts, verbose_extra, show_missed, raw, show_port, flt, both, incoming
     parser = argparse.ArgumentParser(description="netplot - plots programs accessing the network")
     parser.add_argument("-i", "--iface", help="Interface to use, default is scapy's default interface")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", help="Verbose output for each processed packet")
@@ -132,6 +149,10 @@ def main():
     parser.add_argument("-r", "--raw", dest="raw", action="store_true", help="Disable both domain and process resolution")
     parser.add_argument("-f", "--file", dest="filename", action="store", help="Read packets from input file instead of directly accessing network")
     parser.add_argument("-m", "--missed", dest="show_missed", action="store_true", help="Show not supported protocols as missed packets")
+    parser.add_argument("-p", "--show-port", dest="show_port", action="store_true", help="Show which port each process is listening on")
+    parser.add_argument("-F", "--filter", dest="flt", action="store", help="Filter in BPF syntax (same as scapy)")
+    parser.add_argument("-x", "--incoming", dest="incoming", action="store_true", help="Process incoming packets instead of outgoing")
+    parser.add_argument("-b", "--both", dest="both", action="store_true", help="Process both incoming and outgoing packets")
     args = parser.parse_args()
     iface = args.iface
     if not iface:
@@ -142,6 +163,11 @@ def main():
     collect_hosts = args.collect_hosts
     filename = args.filename
     raw = args.raw
+    show_port = args.show_port
+    flt = args.flt
+    incoming = args.incoming
+    both = args.both
+
     sniff_packets()
 
 if __name__=='__main__':

@@ -43,7 +43,8 @@ then great! It means that no packets where sniffed. If you want something plotte
 
 ## Usage
 ```
-usage: netplot.py [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m]
+usage: netplot.py [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m] [-p]
+                  [-F FLT] [-x] [-b]
 
 netplot - plots programs accessing the network
 
@@ -59,6 +60,10 @@ optional arguments:
                         Read packets from input file instead of directly
                         accessing network
   -m, --missed          Show not supported protocols as missed packets
+  -p, --show-port       Show which port each process is listening on
+  -F FLT, --filter FLT  Filter in BPF syntax (same as scapy)
+  -x, --incoming        Process incoming packets instead of outgoing
+  -b, --both            Process both incoming and outgoing packets
 ```
 
 Since apparently `scapy` is slow and misses packets, for some use cases it's better to run `tcpdump` and then process a file with `netplot`.
