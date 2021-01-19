@@ -12,7 +12,7 @@ Then `netplot` is for you!
 
 Functionalities:
 
-* count how many TCP or UDP packets your running programs sent over a period of time, and display them graphically
+* count how many packets your running programs sent over a period of time, and display them graphically
 * optionally show which IP addresses your running programs contacted or try to resolve their dns
 * find out that somehow you're selling your data to Google, Facebook & friends!
 
