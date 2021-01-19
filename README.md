@@ -62,11 +62,11 @@ optional arguments:
 ```
 
 ## TODO list
-* yet to introduce great terminal plotting with [termplotlib](https://github.com/nschloe/termplotlib)
 * add arguments to better control program's behaviour
 * refactor some ugly stuff
 * optionally store interactively captured pcap
 * support more protocols beyond TCP and UDP
+* more plots
 
 ## Contributing
 Basically any input is welcome, bugs, feature request or pull request
