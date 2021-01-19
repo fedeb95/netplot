@@ -67,6 +67,9 @@ def analyze_packets(signal_received, frame):
         print()
         print("Packets not analyzed: ")
         [print(miss) for miss in missed]
+    elif len(missed) > 0:
+        miss_count = len(missed)
+        print(f"Not showing {miss_count} unknown packets. Run with -m")
     exit(0)
 
 def sniff_packets(store=False):
@@ -91,7 +94,7 @@ def process_packet(packet):
     """
     This function is executed whenever a packet is sniffed
     """
-    if packet.haslayer(IP):
+    if (packet.haslayer(TCP) or packet.haslayer(UDP)) and packet.haslayer(IP):
         if is_to_process(packet, get_if_addr(iface)):
             if verbose or verbose_extra:
                 print("==============================")
