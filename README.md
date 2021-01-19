@@ -60,7 +60,8 @@ optional arguments:
                         Read packets from input file instead of directly
                         accessing network
   -m, --missed          Show not supported protocols as missed packets
-  -p, --show-port       Show which port each process is listening on
+  -p, --show-port       Show which port each process is listening on and its
+                        PID
   -F FLT, --filter FLT  Filter in BPF syntax (same as scapy)
   -x, --incoming        Process incoming packets instead of outgoing
   -b, --both            Process both incoming and outgoing packets

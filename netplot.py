@@ -116,7 +116,8 @@ def process_packet(packet):
                     pname = psutil.Process(pid[0][6]).name()
                     if show_port:
                         port = str(pid[0].laddr.port)
-                        pname += f":{port}"
+                        pidd = str(pid[0].pid)
+                        pname += f" PID:{pidd} PORT:{port}"
                 else:
                     pname = f"unknown call to {ip}"
                 collected_data.append(pname)
@@ -149,7 +150,7 @@ def main():
     parser.add_argument("-r", "--raw", dest="raw", action="store_true", help="Disable both domain and process resolution")
     parser.add_argument("-f", "--file", dest="filename", action="store", help="Read packets from input file instead of directly accessing network")
     parser.add_argument("-m", "--missed", dest="show_missed", action="store_true", help="Show not supported protocols as missed packets")
-    parser.add_argument("-p", "--show-port", dest="show_port", action="store_true", help="Show which port each process is listening on")
+    parser.add_argument("-p", "--show-port", dest="show_port", action="store_true", help="Show which port each process is listening on and its PID")
     parser.add_argument("-F", "--filter", dest="flt", action="store", help="Filter in BPF syntax (same as scapy)")
     parser.add_argument("-x", "--incoming", dest="incoming", action="store_true", help="Process incoming packets instead of outgoing")
     parser.add_argument("-b", "--both", dest="both", action="store_true", help="Process both incoming and outgoing packets")
