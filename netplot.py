@@ -29,6 +29,7 @@ show_port = False
 flt = ""
 both = False
 incoming = False
+no_analysis = False
 
 # data collected
 collected_data = []
@@ -49,6 +50,9 @@ def get_addr_or_host(host):
 def analyze_packets(signal_received, frame):
     # insert new line after Ctrl+C
     print()
+    if no_analysis:
+        [ print(entry) for entry in set(collected_data) ]
+        exit(0)
     if verbose or verbose_extra:
         print("Analyzing packets")
     if collected_data == []:
@@ -144,7 +148,7 @@ def filter_conn(item, packet):
     return hasattr(item, 'raddr') and hasattr(item.raddr, 'ip') and hasattr(item, 'laddr') and hasattr(item.laddr, 'port') and item.raddr.ip==packet[IP].dst and item.laddr.port==packet[IP].sport
 
 def main():
-    global iface, verbose, filename, collect_hosts, verbose_extra, show_missed, raw, show_port, flt, both, incoming
+    global iface, verbose, filename, collect_hosts, verbose_extra, show_missed, raw, show_port, flt, both, incoming, no_analysis
     parser = argparse.ArgumentParser(description="netplot - plots programs accessing the network")
     parser.add_argument("-i", "--iface", help="Interface to use, default is scapy's default interface")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", help="Verbose output for each processed packet")
@@ -157,6 +161,7 @@ def main():
     parser.add_argument("-F", "--filter", dest="flt", action="store", help="Filter in BPF syntax (same as scapy)")
     parser.add_argument("-x", "--incoming", dest="incoming", action="store_true", help="Process incoming packets instead of outgoing")
     parser.add_argument("-b", "--both", dest="both", action="store_true", help="Process both incoming and outgoing packets")
+    parser.add_argument("-n", "--no-analysis", dest="no_analysis", action="store_true", help="Don't plot anything, just display collected entries (ideal for further processing). This ignores -m")
     args = parser.parse_args()
     iface = args.iface
     if not iface:
@@ -171,6 +176,7 @@ def main():
     flt = args.flt
     incoming = args.incoming
     both = args.both
+    no_analysis = args.no_analysis
 
     sniff_packets()
 

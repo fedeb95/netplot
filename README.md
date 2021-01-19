@@ -44,7 +44,7 @@ then great! It means that no packets where sent by your computer, so reasonably 
 ## Usage
 ```
 usage: netplot.py [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m] [-p]
-                  [-F FLT] [-x] [-b]
+                  [-F FLT] [-x] [-b] [-n]
 
 netplot - plots programs accessing the network
 
@@ -65,6 +65,8 @@ optional arguments:
   -F FLT, --filter FLT  Filter in BPF syntax (same as scapy)
   -x, --incoming        Process incoming packets instead of outgoing
   -b, --both            Process both incoming and outgoing packets
+  -n, --no-analysis     Don't plot anything, just display collected entries
+                        (ideal for further processing). This ignores -m
 ```
 
 Since apparently `scapy` is slow and misses packets, for some use cases it's better to run `tcpdump` and then process a file with `netplot`.
@@ -74,6 +76,19 @@ This can be done with the simple `netplot.sh` wrapper:
 ./netplot.sh <network_interface> <filename> <other_netplot_args>
 ```
 This has the drawback of potentially missing process names, so if you need them just stick to `netplot.py` without the `-f` option.
+
+## Further output processing
+
+If you don't care about plots but want to further process data collected by `netplot`, run it with the `--no-analysis` option.
+This way processes, domains or hosts as set with the other parameters are simply gathered and printed on a newline each.
+
+An example of further processing can be found in `whois-report.sh` that given an interface listens on it with `tcpdump`,
+then runs `netplot` for hosts and finally generates a report.txt with a `whois` query for each host found. It also saves
+addresses in addresses.txt and packets in packets.pcap. You can see a quick summary of organizations with
+
+```
+cat report.txt | grep OrgTechName | sort | uniq
+```
 
 ## Mitm
 If you use netplot.sh while doing a mitm attack (maybe with `arpspoof`) you can see which sites where most visited by target host in your network. Since process resolution doesn't make sense, `netplot` is best used with `--resolve-domain` or `--raw`.
