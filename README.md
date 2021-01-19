@@ -12,7 +12,7 @@ Then `netplot` is for you!
 
 Functionalities:
 
-* count how many TCP or UDP packets your running programs made over a period of time, and display them graphically
+* count how many TCP or UDP packets your running programs sent over a period of time, and display them graphically
 * optionally show which IP addresses your running programs contacted or try to resolve their dns
 * find out that somehow you're selling your data to Google, Facebook & friends!
 
@@ -67,7 +67,7 @@ This can be done with the simple `netplot.sh` wrapper:
 ```
 ./netplot.sh <network_interface> <filename> <other_netplot_args>
 ```
-This has the drawback of potentially missing process names, so if you need thos just stick to `netplot.py` without the `-f` option.
+This has the drawback of potentially missing process names, so if you need them just stick to `netplot.py` without the `-f` option.
 
 ## TODO list
 * add arguments to better control program's behaviour
