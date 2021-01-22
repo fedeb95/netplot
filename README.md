@@ -33,6 +33,7 @@ vivaldi-bin                      [  2]  *
 * run `python3 -m venv venv`
 * run `source venv/bin/activate`
 * run `pip3 install -r requirements.txt`
+* run `python3 steup.py install`
 * start plotting against tech giants with `sudo ./venv/bin/ptyhon3 netplot.py`!
 
 If you get:
@@ -61,7 +62,7 @@ optional arguments:
                         accessing network
   -m, --missed          Show not supported protocols as missed packets
   -p, --show-port       Show which port each process is listening on and its
-                        PID
+                        PID. Not compatible with -r and -d
   -F FLT, --filter FLT  Filter in BPF syntax (same as scapy)
   -x, --incoming        Process incoming packets instead of outgoing
   -b, --both            Process both incoming and outgoing packets
