@@ -29,12 +29,15 @@ vivaldi-bin                      [  2]  *
 ```
 
 ## Install
-* clone this repo & run `cd netplot`
-* run `python3 -m venv venv`
-* run `source venv/bin/activate`
-* run `pip3 install -r requirements.txt`
-* run `python3 steup.py install`
-* start plotting against tech giants with `sudo ./venv/bin/ptyhon3 netplot.py`!
+clone this repo & run:
+```
+> cd netplot
+> python3 -m venv venv
+> source venv/bin/activate
+> pip3 install -r requirements.txt
+> python3 setup.py install
+```
+Congratulations, you can start plotting against tech giants with `sudo ./venv/bin/ptyhon3 netplot`!
 
 If you get:
 
@@ -44,8 +47,8 @@ then great! It means that no packets where sent by your computer, so reasonably 
 
 ## Usage
 ```
-usage: netplot.py [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m] [-p]
-                  [-F FLT] [-x] [-b] [-n]
+usage: netplot [-h] [-i IFACE] [-v] [-vv] [-d] [-r] [-f FILENAME] [-m] [-p]
+               [-F FLT] [-x] [-b] [-n]
 
 netplot - plots programs accessing the network
 

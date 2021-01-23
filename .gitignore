@@ -1,9 +1,10 @@
-*.pcap
+**/*.pcap
+!test/packets/*.pcap
 venv/
-__pycache__/**
+**/__pycache__
 dist/
 build/
-*.txt
-**.pyc
-*.egg-info/
+**/*.txt
+**/*.pyc
+**/*.egg-info/
 .idea/

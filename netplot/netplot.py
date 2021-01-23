@@ -36,7 +36,7 @@ def analyze_packets(signal_received, frame):
         exit(0)
     if config.verbose or config.verbose_extra:
         print("Analyzing packets")
-    if collected_data == []:
+    if not collected_data:
         print("No data to show :-)")
     else:
         data = np.array(collected_data);
