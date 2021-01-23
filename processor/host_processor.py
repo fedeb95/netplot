@@ -3,6 +3,7 @@ import socket
 
 from processor.processor import Processor
 
+
 class HostProcessor(Processor):
     def __init__(self, config):
         self.config = config
@@ -25,5 +26,3 @@ class HostProcessor(Processor):
             if self.config.verbose_extra:
                 print(f"Failure resolving {host}")
             return host
-
-

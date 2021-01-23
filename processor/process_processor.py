@@ -3,9 +3,10 @@ from scapy.all import IP
 
 from processor.processor import Processor
 
+
 class ProcessProcessor(Processor):
     def __init__(self, config):
-        self.config = config 
+        self.config = config
         self.data = []
 
     def process(self, packet):
@@ -32,11 +33,14 @@ class ProcessProcessor(Processor):
         if self.config.verbose or self.config.verbose_extra:
             print("Process " + pname)
 
+
 def filter_conn(item, ip, port):
-    return has_remote_addr(item) and has_local_addr(item) and item.raddr.ip==ip and item.laddr.port==port
+    return has_remote_addr(item) and has_local_addr(item) and item.raddr.ip == ip and item.laddr.port == port
+
 
 def has_remote_addr(item):
     return hasattr(item, 'raddr') and hasattr(item.raddr, 'ip')
+
 
 def has_local_addr(item):
     return hasattr(item, 'laddr') and hasattr(item.laddr, 'port')

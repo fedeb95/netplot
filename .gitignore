@@ -6,3 +6,4 @@ build/
 *.txt
 **.pyc
 *.egg-info/
+.idea/

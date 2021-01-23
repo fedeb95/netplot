@@ -1,3 +1,3 @@
 class Processor:
     def process(self, packet):
-        raise("Not implemented!")
+        raise Exception("Not implemented!")
