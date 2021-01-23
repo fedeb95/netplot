@@ -1,4 +1,6 @@
 # netplot
+[![Build Status](https://travis-ci.org/fedeb95/netplot.png?branch=master)](https://travis-ci.org/fedeb95/netplot)
+[![Coverage](https://codecov.io/gh/fedeb95/netplot/branch/master/graph/badge.svg)](https://codecov.io/fedeb95/netplot/)
 
 Ever been in one of this situations?
 
