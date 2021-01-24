@@ -21,7 +21,7 @@ Functionalities:
 ## Example
 
 ```
-(venv) fedeb@debian:~/Projects/netplot$ sudo venv/bin/python3 netplot.py -i wlp2s0
+(venv) fedeb@debian:~/Projects/netplot$ sudo venv/bin/python3 netplot -i wlp2s0
 Sniffing packets, interrupt with Ctrl+C
 ^C
 unknown call to dns.adguard.com  [220]  ****************************************

@@ -20,6 +20,8 @@ from processor.host_processor import HostProcessor
 from config.config import Config
 
 # arguments
+from provider.DomainProvider import DomainProvider
+
 config = None
 
 missed = []
@@ -39,7 +41,6 @@ def analyze_packets(signal_received, frame):
     if not collected_data:
         print("No data to show :-)")
     else:
-        data = np.array(collected_data);
         columns = ["data"]
         df = pd.DataFrame(data=list(collected_data), columns=columns)
         table = df["data"].value_counts()
@@ -97,10 +98,10 @@ def is_to_process(packet, localaddr):
         return True
     if config.incoming:
         # incoming packets only
-        return packet[IP].dst == get_if_addr(config.iface)
+        return packet[IP].dst == localaddr
     else:
         # outgoing packets only
-        return packet[IP].dst != get_if_addr(config.iface)
+        return packet[IP].dst != localaddr
 
 
 def main():
@@ -133,7 +134,7 @@ def main():
     config = Config(args)
 
     if config.collect_hosts:
-        processor = HostProcessor(config)
+        processor = HostProcessor(config, DomainProvider(config))
     elif config.raw:
         processor = RawProcessor(config)
     else:
