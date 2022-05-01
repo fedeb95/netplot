@@ -39,7 +39,7 @@ clone this repo & run:
 > pip3 install -r requirements.txt
 > python3 setup.py install
 ```
-Congratulations, you can start plotting against tech giants with `sudo ./venv/bin/ptyhon3 netplot`!
+Congratulations, you can start plotting against tech giants with `sudo ./venv/bin/python3 netplot`!
 
 If you get:
 
