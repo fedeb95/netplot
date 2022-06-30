@@ -3,8 +3,8 @@ from unittest.mock import patch, MagicMock
 
 from scapy.sendrecv import sniff
 
-from processor.host_processor import HostProcessor
-from provider.DomainProvider import DomainProvider
+from netplot.processor.host_processor import HostProcessor
+from netplot.provider.DomainProvider import DomainProvider
 
 
 class MyTestCase(unittest.TestCase):

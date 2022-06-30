@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from scapy.all import *
-from processor.raw_processor import RawProcessor
+from netplot.processor.raw_processor import RawProcessor
 
 
 class MyTestCase(unittest.TestCase):
