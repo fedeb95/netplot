@@ -1,7 +1,7 @@
 from scapy.all import IP
 import socket
 
-from processor.processor import Processor
+from netplot.processor.processor import Processor
 
 
 class HostProcessor(Processor):
