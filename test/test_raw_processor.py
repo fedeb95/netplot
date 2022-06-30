@@ -6,7 +6,7 @@ from netplot.processor.raw_processor import RawProcessor
 
 
 class MyTestCase(unittest.TestCase):
-    @patch('config.config.Config')
+    @patch('netplot.config.Config')
     def test_tcp_incoming_arg_incoming_True(self, config):
         packets = sniff(offline='./test/packets/tcp_incoming.pcap')
         config.incoming = True
@@ -16,7 +16,7 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(['208.80.154.224'], processor.data)
 
-    @patch('config.config.Config')
+    @patch('netplot.config.Config')
     def test_tcp_outgoing_arg_incoming_False(self, config):
         packets = sniff(offline='./test/packets/tcp_outgoing.pcap')
         config.incoming = False
