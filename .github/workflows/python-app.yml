@@ -28,8 +28,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install coverage
         pip install codecov
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        python setup.py install
+        pip install .
     - name: Test
       run: |
         coverage run --branch -m unittest discover
