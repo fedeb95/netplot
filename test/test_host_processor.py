@@ -8,7 +8,7 @@ from netplot.provider.DomainProvider import DomainProvider
 
 
 class MyTestCase(unittest.TestCase):
-    @patch('config.config.Config')
+    @patch('netplot.config.config.Config')
     def test_tcp_incoming_arg_incoming_True(self, config):
         packets = sniff(offline='./test/packets/tcp_incoming.pcap')
         config.incoming = True
@@ -21,7 +21,7 @@ class MyTestCase(unittest.TestCase):
         provider.get_domain.assert_called_with('208.80.154.224')
         self.assertEqual(['fake.domain'], processor.data)
 
-    @patch('config.config.Config')
+    @patch('netplot.config.config.Config')
     def test_tcp_outgoing_arg_incoming_False(self, config):
         packets = sniff(offline='./test/packets/tcp_outgoing.pcap')
         config.incoming = False
