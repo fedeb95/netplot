@@ -34,12 +34,9 @@ vivaldi-bin                      [  2]  *
 clone this repo & run:
 ```
 > cd netplot
-> python3 -m venv venv
-> source venv/bin/activate
-> pip3 install -r requirements.txt
-> python3 setup.py install
+> sudo python -m pip install .
 ```
-Congratulations, you can start plotting against tech giants with `sudo ./venv/bin/python3 netplot`!
+Congratulations, you can start plotting against tech giants with `sudo netplot`!
 
 If you get:
 
