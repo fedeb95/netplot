@@ -1,7 +1,7 @@
 import psutil
 from scapy.all import IP
 
-from processor import Processor
+from netplot.processor.processor import Processor
 
 
 class ProcessProcessor(Processor):
