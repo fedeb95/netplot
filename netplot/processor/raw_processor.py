@@ -1,6 +1,6 @@
 from scapy.all import IP
 
-from netplot.processor.processor import Processor
+from processor.processor import Processor
 
 
 class RawProcessor(Processor):

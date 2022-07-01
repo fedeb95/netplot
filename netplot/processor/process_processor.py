@@ -1,7 +1,7 @@
 import psutil
 from scapy.all import IP
 
-from processor.processor import Processor
+from processor import Processor
 
 
 class ProcessProcessor(Processor):

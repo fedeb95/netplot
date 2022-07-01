@@ -14,10 +14,10 @@ import numpy as np
 import pandas as pd
 import termplotlib as tpl
 
-from netplot.processor.process_processor import ProcessProcessor
-from netplot.processor.raw_processor import RawProcessor
-from netplot.processor.host_processor import HostProcessor
-from netplot.config.config import Config
+from processor.process_processor import ProcessProcessor
+from processor.raw_processor import RawProcessor
+from processor.host_processor import HostProcessor
+from config.config import Config
 
 # arguments
 from provider.DomainProvider import DomainProvider

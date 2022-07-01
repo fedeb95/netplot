@@ -1,3 +1,23 @@
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "netplot"
+version = "0.1.1"
+dependencies = [
+    "numpy",
+    "pandas",
+    "psutil",
+    "python-dateutil",
+    "pytz",
+    "scapy",
+    "six",
+    "termplotlib"
+]
+
+[project.scripts]
+netplot = "netplot.__main__:main"
+
+[tool.setuptools.packages.find]
+include=["netplot", "netplot.*"]
